@@ -6,5 +6,7 @@ metadata:
   namespace: redis
 spec:
   nodes: 3
+  pullSecrets:
+    - name: dockerhub-secret
   redisEnterpriseImageSpec:
     repository: redislabs/redis
