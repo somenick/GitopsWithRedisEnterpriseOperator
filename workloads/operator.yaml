@@ -13,6 +13,8 @@ spec:
       labels:
         name: redis-enterprise-operator
     spec:
+      imagePullSecrets:
+        - name: dockerhub-secrets
       serviceAccountName: redis-enterprise-operator
       containers:
         - name: redis-enterprise-operator
