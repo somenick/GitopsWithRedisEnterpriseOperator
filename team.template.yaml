@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: REPLACE_NAMESPACE
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: redb-role
+  namespace: REPLACE_NAMESPACE
+rules:
+  - apiGroups:
+      - app.redislabs.com
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["*"]
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create"]
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "watch", "list", "update", "patch", "create", "delete"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: redb-role
+  namespace: REPLACE_NAMESPACE
+subjects:
+- kind: ServiceAccount
+  name: redis-enterprise-operator
+  namespace: redis
+- kind: ServiceAccount
+  name: demo
+  namespace: redis
+roleRef:
+  kind: Role
+  name: redb-role
+  apiGroup: rbac.authorization.k8s.io

@@ -1,8 +1,14 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: redis
+---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: redis-enterprise-operator
+  namespace: redis
 rules:
   - apiGroups: ["rbac.authorization.k8s.io", ""]
     resources: ["roles", "serviceaccounts", "rolebindings"]
@@ -60,6 +66,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: redis-enterprise-operator
+  namespace: redis
 subjects:
 - kind: ServiceAccount
   name: redis-enterprise-operator
@@ -72,6 +79,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: redis-enterprise-operator
+  namespace: redis
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
@@ -1753,52 +1761,6 @@ spec:
               type: array
           type: object
       type: object
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: redis-enterprise-operator
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      name: redis-enterprise-operator
-  template:
-    metadata:
-      labels:
-        name: redis-enterprise-operator
-    spec:
-      serviceAccountName: redis-enterprise-operator
-      containers:
-        - name: redis-enterprise-operator
-          # Replace this with the built image name
-          image: redislabs/operator-internal:100.0.1-4109
-          command:
-          - redis-enterprise-operator
-          imagePullPolicy: Always
-          env:
-            - name: WATCH_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: OPERATOR_NAME
-              value: "redis-enterprise-operator"
-            - name: DATABASE_CONTROLLER_ENABLED
-              value: "true"
-            - name: USE_INTERNAL_REPO
-              value: "yes"
-          resources:
-            limits:
-              cpu: 4000m
-              memory: 512Mi
-            requests:
-              cpu: 500m
-              memory: 256Mi
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition

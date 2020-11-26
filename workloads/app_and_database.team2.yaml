@@ -3,15 +3,15 @@ apiVersion: app.redislabs.com/v1alpha1
 kind: RedisEnterpriseDatabase
 metadata:
   name: "guestbook-database"
+  namespace: team2
 spec:
-  redisEnterpriseCluster:
-    name: "redis-enterprise"
   replication: true
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: guestbook
+  namespace: team2
 spec:
   replicas: 1
   selector:
@@ -52,6 +52,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: guestbook
+  namespace: team2
 spec:
   ports:
     - port: 80
