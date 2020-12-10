@@ -9,4 +9,11 @@ spec:
   pullSecrets:
     - name: dockerhub-secret
   redisEnterpriseImageSpec:
-    repository: redislabs/redis
+    imagePullPolicy:  IfNotPresent
+    repository: redislabs/redis-internal
+  redisEnterpriseServicesRiggerImageSpec:
+    imagePullPolicy:  IfNotPiesent
+    repository:       redislabs/k8s-controller-internal
+  bootstrapperImageSpec:
+    imagePullPolicy:  IfNotPresent
+    repository:       redislabs/operator-internal
