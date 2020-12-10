@@ -42,7 +42,7 @@ subjects:
   name: redis-enterprise-admission
   namespace: redis
 - kind: ServiceAccount
-  name: demo
+  name: redis-enterprise
   namespace: redis
 roleRef:
   kind: Role
