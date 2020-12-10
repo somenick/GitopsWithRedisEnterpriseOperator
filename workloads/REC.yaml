@@ -12,7 +12,7 @@ spec:
     imagePullPolicy:  IfNotPresent
     repository: redislabs/redis-internal
   redisEnterpriseServicesRiggerImageSpec:
-    imagePullPolicy:  IfNotPiesent
+    imagePullPolicy:  IfNotPresent
     repository:       redislabs/k8s-controller-internal
   bootstrapperImageSpec:
     imagePullPolicy:  IfNotPresent
