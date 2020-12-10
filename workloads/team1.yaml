@@ -39,6 +39,9 @@ subjects:
   name: redis-enterprise-operator
   namespace: redis
 - kind: ServiceAccount
+  name: redis-enterprise-admission
+  namespace: redis
+- kind: ServiceAccount
   name: demo
   namespace: redis
 roleRef:

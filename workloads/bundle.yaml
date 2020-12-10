@@ -1978,7 +1978,7 @@ spec:
                 ftp:
                   properties:
                     url:
-                      description: "a URI of the 'ftps://[USER[:PASSWORD]@]HOST[:PORT]/PATH[/]' format"
+                      description: "a URI of the ftps://[USER[:PASSWORD]@]HOST[:PORT]/PATH[/]"
                       type: string
                       pattern: ftps?://(([^@]+)@)?([^@/:]+)(:(\d+))?([/\.]/?[^@/\.]+)*?/?$
                   required:
@@ -2145,14 +2145,14 @@ spec:
                 properties:
                   clientKeySecret:
                     description: Secret that defines what client key to use.  The
-                      secret needs 2 keys in its map, "cert" that is the PEM encoded
+                      secret needs 2 keys in it's map, "cert" that is the PEM encoded
                       certificate and "key" that is the PEM encoded private key
                     type: string
                   compression:
                     description: GZIP Compression level (0-9) to use for replication
                     type: integer
                   replicaSourceName:
-                    description: Kubernetes resource (SECRET/REDB) name of type ReplicaSourceType
+                    description: Kubernetes resource name of type ReplicaSourceType
                     type: string
                   replicaSourceType:
                     description: Determines what Kuberetes resource ReplicaSourceName
@@ -2163,7 +2163,7 @@ spec:
                     type: string
                   serverCertSecret:
                     description: Secret that defines the Server's certificate.  The
-                      secret needs 1 key in its map, "cert" that is the PEM encoded
+                      secret needs 1 key in it's map, "cert" that is the PEM encoded
                       certificate
                     type: string
                   tlsSniName:

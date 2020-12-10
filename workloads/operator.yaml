@@ -19,7 +19,7 @@ spec:
       containers:
         - name: redis-enterprise-operator
           # Replace this with the built image name
-          image: redislabs/operator-internal:100.0.1-4109
+          image: redislabs/operator-internal:100.0.0-500
           command:
           - redis-enterprise-operator
           imagePullPolicy: Always
@@ -28,8 +28,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: REDB_NAMESPACES
-              value: "team1,team2"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -38,8 +36,8 @@ spec:
               value: "redis-enterprise-operator"
             - name: DATABASE_CONTROLLER_ENABLED
               value: "true"
-            - name: USE_INTERNAL_REPO
-              value: "yes"
+            - name: REDB_NAMESPACES
+              value: "team1,team2"
           resources:
             limits:
               cpu: 4000m
